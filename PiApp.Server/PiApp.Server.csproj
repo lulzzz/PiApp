@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RuntimeIdentifier>linux-arm</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <SshDeployHost>192.168.50.131</SshDeployHost>
+    <SshDeployTargetPath>/home/pi/pi-app</SshDeployTargetPath>
+    <SshDeployUsername>pi</SshDeployUsername>
+    <SshDeployPassword>raspberry</SshDeployPassword>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="0.7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Api.Analyzers" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.6" />
+    <PackageReference Include="Unosquare.Raspberry.IO" Version="0.17.2" />
+    <PackageReference Include="Unosquare.RaspberryIO.Peripherals" Version="0.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PiApp.Client\PiApp.Client.csproj" />
+    <ProjectReference Include="..\PiApp.Services\PiApp.Services.csproj" />
+    <ProjectReference Include="..\PiApp.Shared\PiApp.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

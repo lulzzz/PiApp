@@ -1,0 +1,45 @@
+﻿@page "/callbutton"
+@implements IDisposable
+@using PiApp.Services.Clients
+@using System.Reactive.Linq
+@using Microsoft.Extensions.Logging
+@inject ICallButtonService CallButtonService
+@inject ILogger<CallButton> Logger
+
+<h1>Call Button</h1>
+
+<p><b>State:</b> @(state ? "Pressed" : "Released")</p>
+
+@functions {
+    bool state = false;
+
+    protected override async Task OnInitAsync()
+    {
+        await base.OnInitAsync();
+
+        CallButtonService.ButtonPressed += ButtonPressed;
+        CallButtonService.ButtonReleased += ButtonReleased;
+
+        await CallButtonService.StartAsync();
+    }
+
+    void ButtonPressed(object sender, EventArgs eventArgs)
+    {
+        state = true;
+        StateHasChanged();
+    }
+
+    void ButtonReleased(object sender, EventArgs eventArgs)
+    {
+        state = false;
+        StateHasChanged();
+    }
+
+    public async void Dispose()
+    {
+        await CallButtonService.StopAsync();
+
+        CallButtonService.ButtonPressed -= ButtonPressed;
+        CallButtonService.ButtonReleased -= ButtonReleased;
+    }
+}

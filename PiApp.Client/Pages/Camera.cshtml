@@ -1,0 +1,28 @@
+﻿@page "/camera"
+@using PiApp.Services.Clients
+@using Microsoft.Extensions.Logging
+@inject ICameraService CameraService
+@inject ILogger<Camera> Logger
+
+<h1>Camera</h1>
+
+@if (photo != null)
+{
+<div>
+    <img src="data:image/png;base64, @(photo)" alt="Photo" />
+</div>
+
+<br />
+}
+
+<button class="btn btn-primary" onclick="@OnClick">Capture photo</button>
+
+@functions {
+    string photo;
+
+    async Task OnClick()
+    {
+        photo = await CameraService.CaptureImageAsync();
+        StateHasChanged();
+    }
+}

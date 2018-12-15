@@ -1,0 +1,45 @@
+﻿@page "/rfidreader"
+@implements IDisposable
+@using PiApp.Services.Clients
+@using System.Reactive.Linq
+@using Microsoft.Extensions.Logging
+@inject IRfidReader RfidReader
+@inject ILogger<Rfid> Logger
+
+<h1>RFID Reader</h1>
+
+<p>Read a card</p>
+
+@if (uid != null)
+{
+<p><b>UID:</b> @string.Join(", ", uid)</p>
+}
+
+@functions {
+    byte[] uid;
+    IDisposable subscription;
+
+    protected override async Task OnInitAsync()
+    {
+        await base.OnInitAsync();
+
+        subscription = RfidReader
+            .WhenCardDataReceived
+            .Subscribe(cardData =>
+            {
+                uid = cardData.UID;
+                StateHasChanged();
+
+                Logger.LogInformation(string.Join(", ", uid));
+            });
+
+        await RfidReader.StartAsync();
+    }
+
+    public async void Dispose()
+    {
+        await RfidReader.StopAsync();
+
+        subscription.Dispose();
+    }
+}

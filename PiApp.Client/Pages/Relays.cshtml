@@ -1,0 +1,70 @@
+﻿@page "/relays"
+@implements IDisposable
+@using PiApp.Services.Clients
+@using PiApp.Shared
+@using Microsoft.Extensions.Logging
+@inject IRelayControlService RelayControlService
+@inject IRelayNotifierService RelayNotifierService
+@inject ILogger<Camera> Logger
+
+<h1>Relays</h1>
+
+@if (relayInfos != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">State</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var relayInfo in relayInfos)
+            {
+            <tr>
+                <th scope="row">@relayInfo.Id</th>
+                <td>@relayInfo.State</td>
+                <td><button onclick="@(() => SetRelayStateAsync(relayInfo.Id, !relayInfo.State))">Toggle</button></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Loading relays...</p>
+}
+
+@functions {
+IEnumerable<RelayInfo> relayInfos;
+IDisposable subscription;
+
+protected override async Task OnInitAsync()
+{
+    await base.OnInitAsync();
+
+    relayInfos = await RelayControlService.GetRelaysAsync();
+
+    subscription = RelayNotifierService.WhenRelayStateSet.Subscribe(stateInfo =>
+    {
+        var f = relayInfos.First(t => t.Id == stateInfo.Id);
+        f.State = stateInfo.State;
+        relayInfos = relayInfos.Select(x => x);
+        StateHasChanged();
+    });
+
+    await RelayNotifierService.StartAsync();
+}
+
+async Task SetRelayStateAsync(int relayId, bool state)
+{
+    await RelayControlService.SetRelayStateAsync(relayId, state);
+}
+
+public void Dispose()
+{
+    subscription.Dispose();
+    RelayNotifierService.StopAsync();
+}
+}

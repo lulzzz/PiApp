@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PiApp.Server", "PiApp.Server\PiApp.Server.csproj", "{20D44E8F-19D2-4C93-A3FB-932EF516F10F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PiApp.Client", "PiApp.Client\PiApp.Client.csproj", "{D3CBEBFA-6BEC-445A-91D7-9B544886589C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PiApp.Shared", "PiApp.Shared\PiApp.Shared.csproj", "{E5CEDC2A-C0AE-48A0-BDED-6F478B875122}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PiApp.Server.Tests", "PiApp.Server.Tests\PiApp.Server.Tests.csproj", "{DA042E2A-52E0-47FC-B019-1281F62DB1ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0635B45C-6E21-49D9-9EAD-F6698F6AD1D5}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiApp.Services.Clients", "PiApp.Services.Clients\PiApp.Services.Clients.csproj", "{DC6A27F7-3293-4D32-BC8C-0DA38D1E5A6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiApp.Services", "PiApp.Services\PiApp.Services.csproj", "{7F138CBF-2613-44B0-84BB-E2D8FCDB9A70}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20D44E8F-19D2-4C93-A3FB-932EF516F10F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20D44E8F-19D2-4C93-A3FB-932EF516F10F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20D44E8F-19D2-4C93-A3FB-932EF516F10F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20D44E8F-19D2-4C93-A3FB-932EF516F10F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3CBEBFA-6BEC-445A-91D7-9B544886589C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3CBEBFA-6BEC-445A-91D7-9B544886589C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3CBEBFA-6BEC-445A-91D7-9B544886589C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3CBEBFA-6BEC-445A-91D7-9B544886589C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5CEDC2A-C0AE-48A0-BDED-6F478B875122}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5CEDC2A-C0AE-48A0-BDED-6F478B875122}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5CEDC2A-C0AE-48A0-BDED-6F478B875122}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5CEDC2A-C0AE-48A0-BDED-6F478B875122}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA042E2A-52E0-47FC-B019-1281F62DB1ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA042E2A-52E0-47FC-B019-1281F62DB1ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA042E2A-52E0-47FC-B019-1281F62DB1ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA042E2A-52E0-47FC-B019-1281F62DB1ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC6A27F7-3293-4D32-BC8C-0DA38D1E5A6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC6A27F7-3293-4D32-BC8C-0DA38D1E5A6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC6A27F7-3293-4D32-BC8C-0DA38D1E5A6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC6A27F7-3293-4D32-BC8C-0DA38D1E5A6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F138CBF-2613-44B0-84BB-E2D8FCDB9A70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F138CBF-2613-44B0-84BB-E2D8FCDB9A70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F138CBF-2613-44B0-84BB-E2D8FCDB9A70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F138CBF-2613-44B0-84BB-E2D8FCDB9A70}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4F10DBEE-CD20-4513-B596-AEC7FBC59578}
+	EndGlobalSection
+EndGlobal
