@@ -44,7 +44,7 @@ namespace PiApp.Client
                     new HubConnectionBuilder().WithUrlBlazor("/relay-hub",
                             options: opt => opt.Transports = HttpTransportType.WebSockets).Build());
             });
-
+            services.AddSingleton<IBuzzerService, BuzzerService>();
         }
 
         public void Configure(IBlazorApplicationBuilder app)

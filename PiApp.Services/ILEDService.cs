@@ -1,8 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace PiApp.Services
 {
-    public interface ILEDService
+    public interface ILEDService : IDisposable
     {
         Task TurnOffAsync();
         Task TurnOnAsync();

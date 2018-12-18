@@ -35,6 +35,8 @@ namespace PiApp.Server
             services.AddSingleton<ILEDService, LEDService>();
             services.AddSingleton<ICameraService, CameraService>();
             services.AddSingleton<IRelayService, RelayService>();
+            services.AddSingleton<ICallButtonService, CallButtonService>();
+            services.AddSingleton<IBuzzerService, BuzzerService>();
 
             services.AddHostedService<RfidReaderHostedService>();
             services.AddHostedService<CallButtonHostedService>();

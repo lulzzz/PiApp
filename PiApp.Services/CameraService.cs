@@ -7,7 +7,7 @@ using Unosquare.RaspberryIO.Camera;
 
 namespace PiApp.Services
 {
-    public sealed class CameraService : IDisposable, ICameraService
+    public sealed class CameraService : ICameraService
     {
         private readonly ILogger _logger;
         private readonly CameraController _camera;

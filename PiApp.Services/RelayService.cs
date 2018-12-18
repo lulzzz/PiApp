@@ -39,5 +39,10 @@ namespace PiApp.Services
         {
             return !(await _relayGpioMappings[relay].ReadAsync());
         }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

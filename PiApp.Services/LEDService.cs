@@ -36,5 +36,10 @@ namespace PiApp.Services
             var isSet = await _pin.ReadAsync();
             await _pin.WriteAsync(!isSet);
         }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

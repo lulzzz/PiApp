@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PiApp.Services
 {
-    public interface IRfidReader
+    public interface IRfidReader : IDisposable
     {
         Task StartAsync();
         Task StopAsync();

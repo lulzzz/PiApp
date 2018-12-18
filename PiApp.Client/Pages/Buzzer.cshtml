@@ -1,0 +1,30 @@
+﻿@page "/buzzer"
+@using PiApp.Services.Clients
+@using Microsoft.Extensions.Logging
+@inject IBuzzerService BuzzerService
+@inject ILogger<Buzzer> Logger
+
+<h1>Buzzer</h1>
+
+<div class="input-group mb-3">
+    <input type="number" bind="@milliseconds" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" />
+    <div class="input-group-append">
+        <span class="input-group-text">milliseconds</span>
+        <button class="btn btn-outline-primary" type="button" onclick="@OnBuzz">Buzz</button>
+        <button class="btn btn-outline-secondary" type="button" onclick="@OnStop">Stop</button>
+    </div>
+</div>
+
+@functions {
+    int milliseconds = 5000;
+
+    async Task OnBuzz()
+    {
+        await BuzzerService.BuzzAsync(TimeSpan.FromMilliseconds(milliseconds));
+    }
+
+    async Task OnStop()
+    {
+        await BuzzerService.StopAsync();
+    }
+}

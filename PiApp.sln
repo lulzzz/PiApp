@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiApp.Services.Clients", "P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiApp.Services", "PiApp.Services\PiApp.Services.csproj", "{7F138CBF-2613-44B0-84BB-E2D8FCDB9A70}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiApp.Peripherals", "PiApp.Peripherals\PiApp.Peripherals.csproj", "{CF745FAD-547F-4E90-B9D9-30D4CB935D65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{7F138CBF-2613-44B0-84BB-E2D8FCDB9A70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F138CBF-2613-44B0-84BB-E2D8FCDB9A70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F138CBF-2613-44B0-84BB-E2D8FCDB9A70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF745FAD-547F-4E90-B9D9-30D4CB935D65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF745FAD-547F-4E90-B9D9-30D4CB935D65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF745FAD-547F-4E90-B9D9-30D4CB935D65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF745FAD-547F-4E90-B9D9-30D4CB935D65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
