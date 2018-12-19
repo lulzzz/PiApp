@@ -24,7 +24,7 @@
             {
             <tr>
                 <th scope="row">@relayInfo.Id</th>
-                <td>@relayInfo.State</td>
+                <td>@(relayInfo.State ? "On" : "Off")</td>
                 <td><button onclick="@(() => SetRelayStateAsync(relayInfo.Id, !relayInfo.State))">Toggle</button></td>
             </tr>
             }

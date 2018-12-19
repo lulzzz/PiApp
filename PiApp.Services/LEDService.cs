@@ -17,7 +17,7 @@ namespace PiApp.Services
         {
             _logger = logger;
 
-            _pin = Pi.Gpio.GetGpioPinByBcmPinNumber(16);
+            _pin = Pi.Gpio.Pin24;
             _pin.PinMode = GpioPinDriveMode.Output;
         }
 
@@ -39,7 +39,7 @@ namespace PiApp.Services
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+
         }
     }
 }

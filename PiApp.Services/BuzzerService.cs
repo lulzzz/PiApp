@@ -16,7 +16,7 @@ namespace PiApp.Services
 
         public BuzzerService()
         {
-            _buzzer = new Buzzer(Pi.Gpio.Pin27);
+            _buzzer = new Buzzer(Pi.Gpio.Pin23);
         }
 
         public async Task BuzzAsync(TimeSpan time, CancellationToken cancellationToken = default)

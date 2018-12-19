@@ -45,6 +45,7 @@ namespace PiApp.Client
                             options: opt => opt.Transports = HttpTransportType.WebSockets).Build());
             });
             services.AddSingleton<IBuzzerService, BuzzerService>();
+            services.AddSingleton<ILEDService, LEDService>();
         }
 
         public void Configure(IBlazorApplicationBuilder app)

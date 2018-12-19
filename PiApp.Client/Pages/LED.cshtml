@@ -1,0 +1,14 @@
+﻿@page "/led"
+@using PiApp.Services.Clients
+@inject ILEDService LEDService
+
+<h1>LED</h1>
+
+<button class="btn btn-primary" onclick="@OnClick">Toggle</button>
+
+@functions {
+    async Task OnClick()
+    {
+        await LEDService.ToggleAsync();
+    }
+}

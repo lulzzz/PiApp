@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <SshDeployHost>192.168.1.252</SshDeployHost>
+    <SshDeployHost>192.168.50.131</SshDeployHost>
     <SshDeployTargetPath>/home/pi/pi-app</SshDeployTargetPath>
     <SshDeployUsername>pi</SshDeployUsername>
     <SshDeployPassword>raspberry</SshDeployPassword>
