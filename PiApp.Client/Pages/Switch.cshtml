@@ -1,0 +1,46 @@
+﻿@page "/switch"
+@implements IDisposable
+@using PiApp.Services.Clients
+@using Microsoft.Extensions.Logging
+@inject ISwitchService SwitchService
+@inject ILogger<Switch> Logger
+
+<h1>Switch</h1>
+
+<p><b>State:</b> @(state ? "Closed" : "Open")</p>
+
+@functions {
+    bool state = false;
+
+    protected override async Task OnInitAsync()
+    {
+        await base.OnInitAsync();
+
+        state = await SwitchService.GetStateAsync();
+
+        SwitchService.Closed += Closed;
+        SwitchService.Open += Open;
+
+        await SwitchService.StartAsync();
+    }
+
+    void Closed(object sender, EventArgs eventArgs)
+    {
+        state = true;
+        StateHasChanged();
+    }
+
+    void Open(object sender, EventArgs eventArgs)
+    {
+        state = false;
+        StateHasChanged();
+    }
+
+    public async void Dispose()
+    {
+        await SwitchService.StopAsync();
+
+        SwitchService.Closed -= Closed;
+        SwitchService.Open -= Open;
+    }
+}

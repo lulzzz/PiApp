@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PiApp.Shared
+﻿namespace PiApp.Shared
 {
     public class RelayInfo
     {

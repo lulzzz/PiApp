@@ -1,0 +1,52 @@
+﻿@page "/gpio"
+@using PiApp.Services.Clients
+@using PiApp.Shared
+@using Microsoft.Extensions.Logging
+@inject IGpioService GpioService
+@inject ILogger<Gpio> Logger
+
+<h1>GPIO</h1>
+
+<h2>Pins</h2>
+
+@if (gpioPinInfos != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Header #</th>
+                <th scope="col">BCM #</th>
+                <th scope="col">Wiring Pi #</th>
+                <th scope="col">Pin Mode</th>
+                <th scope="col">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var gpioPinInfo in gpioPinInfos)
+            {
+            <tr>
+                <th scope="row">@gpioPinInfo.HeaderPinNumber</th>
+                <th scope="row">@gpioPinInfo.BcmPinNumber</th>
+                <th scope="row">@gpioPinInfo.WiringPiPinNumber</th>
+                <th>@gpioPinInfo.PinMode</th>
+                <th>@gpioPinInfo.Value</th>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Loading ports...</p>
+}
+
+@functions {
+    IEnumerable<GpioPinInfo> gpioPinInfos;
+
+    protected override async Task OnInitAsync()
+    {
+        await base.OnInitAsync();
+
+        gpioPinInfos = await GpioService.GetGpioPinsAsync();
+    }
+}

@@ -2,22 +2,24 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Unosquare.RaspberryIO.Gpio;
-using Unosquare.RaspberryIO.Native;
 
 namespace PiApp.Peripherals
 {
-    public sealed class Buzzer
+    public sealed class Buzzer : IBuzzer
     {
-        private GpioPin _pin;
         private CancellationTokenSource cts;
 
-        public Buzzer(GpioPin pin)
+        public Buzzer(GpioPin pin, int toneFrequency = 523)
         {
-            _pin = pin;
-            _pin.PinMode = GpioPinDriveMode.Output;
+            Pin = pin;
+            Pin.PinMode = GpioPinDriveMode.Output;
+
+            ToneFrequency = toneFrequency;
         }
 
         public int ToneFrequency { get; set; } = 523;
+
+        public GpioPin Pin { get; }
 
         public async Task BuzzAsync(CancellationToken cancellationToken = default)
         {
@@ -28,7 +30,7 @@ namespace PiApp.Peripherals
         {
             cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
-            _pin.SoftToneFrequency = ToneFrequency;
+            Pin.SoftToneFrequency = ToneFrequency;
             try
             {
                 await Task.Delay(time, cts.Token);
@@ -39,7 +41,7 @@ namespace PiApp.Peripherals
             }
             finally
             {
-                _pin.SoftToneFrequency = 0;
+                Pin.SoftToneFrequency = 0;
                 cts = null;
             }
         }

@@ -2,7 +2,7 @@
 
 namespace PiApp.Server.Hubs
 {
-    public class RelayHub : Hub
+    public class SwitchHub : Hub
     {
     }
 }

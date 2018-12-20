@@ -2,14 +2,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PiApp.Services
+namespace PiApp.Peripherals
 {
-    public interface IBuzzerService : IDisposable
+    public interface IBuzzer
     {
-        //int ToneFrequency { get; set; }
-
+        int ToneFrequency { get; set; }
+        Task BuzzAsync(CancellationToken cancellationToken = default);
         Task BuzzAsync(TimeSpan time, CancellationToken cancellationToken = default);
-
         void Stop();
     }
 }

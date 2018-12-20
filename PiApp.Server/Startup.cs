@@ -37,9 +37,11 @@ namespace PiApp.Server
             services.AddSingleton<IRelayService, RelayService>();
             services.AddSingleton<ICallButtonService, CallButtonService>();
             services.AddSingleton<IBuzzerService, BuzzerService>();
+            services.AddSingleton<ISwitchService, SwitchService>();
 
             services.AddHostedService<RfidReaderHostedService>();
             services.AddHostedService<CallButtonHostedService>();
+            services.AddHostedService<SwitchHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +67,7 @@ namespace PiApp.Server
                 route.MapHub<RfidReaderHub>("/rfid-reader");
                 route.MapHub<CallButtonHub>("/call-button");
                 route.MapHub<RelayHub>("/relay-hub");
+                route.MapHub<SwitchHub>("/switch");
             });
 
             app.UseBlazor<Client.Startup>();

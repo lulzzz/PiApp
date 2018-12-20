@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PiApp.Services.Clients;
+using System.Net.Http;
 
 namespace PiApp.Client
 {
@@ -40,12 +41,21 @@ namespace PiApp.Client
             services.AddSingleton<IRelayNotifierService>(sp =>
             {
                 return new RelayNotifierService(
-                    sp.GetService<ILogger<RelayNotifierService>>(), 
+                    sp.GetService<ILogger<RelayNotifierService>>(),
                     new HubConnectionBuilder().WithUrlBlazor("/relay-hub",
                             options: opt => opt.Transports = HttpTransportType.WebSockets).Build());
             });
             services.AddSingleton<IBuzzerService, BuzzerService>();
             services.AddSingleton<ILEDService, LEDService>();
+            services.AddSingleton<ISwitchService>(sp =>
+            {
+                return new SwitchService(
+                    sp.GetService<ILogger<SwitchService>>(),
+                    sp.GetService<HttpClient>(),
+                    new HubConnectionBuilder().WithUrlBlazor("/switch",
+                            options: opt => opt.Transports = HttpTransportType.WebSockets).Build());
+            });
+            services.AddSingleton<IGpioService, GpioService>();
         }
 
         public void Configure(IBlazorApplicationBuilder app)

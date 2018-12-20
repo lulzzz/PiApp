@@ -1,7 +1,5 @@
 ﻿using PiApp.Peripherals;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Unosquare.RaspberryIO;
@@ -10,9 +8,7 @@ namespace PiApp.Services
 {
     public sealed class BuzzerService : IBuzzerService
     {
-        private Buzzer _buzzer;
-
-        public int ToneFrequency { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private readonly Buzzer _buzzer;
 
         public BuzzerService()
         {
@@ -31,7 +27,6 @@ namespace PiApp.Services
 
         public void Dispose()
         {
-
         }
     }
 }

@@ -6,15 +6,12 @@ using PiApp.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Unosquare.RaspberryIO;
-using Unosquare.RaspberryIO.Peripherals;
 
 namespace PiApp.Server.HostedServices
 {
     public sealed class CallButtonHostedService : IHostedService, IDisposable
     {
         private readonly ILogger _logger;
-        private Button button;
         private readonly IHubContext<CallButtonHub> _callButtonHubContext;
         private readonly ICallButtonService _callButtonService;
 
@@ -30,7 +27,7 @@ namespace PiApp.Server.HostedServices
 
         public void Dispose()
         {
-            _callButtonService.Dispose();
+            _callButtonService?.Dispose();
         }
 
         public Task StartAsync(CancellationToken cancellationToken)

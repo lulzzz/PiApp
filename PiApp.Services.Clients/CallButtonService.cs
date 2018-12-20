@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Logging;
-using PiApp.Shared;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive.Subjects;
 using System.Threading.Tasks;
 
 namespace PiApp.Services.Clients
@@ -13,8 +9,8 @@ namespace PiApp.Services.Clients
     {
         private readonly HubConnection _hubConnection;
         private readonly ILogger<CallButtonService> _logger;
-        private readonly IDisposable subscription;
-        private readonly IDisposable subscription2;
+        private readonly IDisposable pressedSubscription;
+        private readonly IDisposable releasedSubscription;
 
         public CallButtonService(ILogger<CallButtonService> logger, HubConnection hubConnection)
         {
@@ -43,12 +39,12 @@ namespace PiApp.Services.Clients
                 }
             };
 
-            subscription = _hubConnection.On<string>("ButtonPressed", _ =>
+            pressedSubscription = _hubConnection.On<string>("ButtonPressed", _ =>
             {
                 ButtonPressed?.Invoke(this, EventArgs.Empty);
             });
 
-            subscription2 = _hubConnection.On<string>("ButtonReleased", _ =>
+            releasedSubscription = _hubConnection.On<string>("ButtonReleased", _ =>
             {
                 ButtonReleased?.Invoke(this, EventArgs.Empty);
             });
@@ -70,8 +66,8 @@ namespace PiApp.Services.Clients
 
         public void Dispose()
         {
-            subscription.Dispose();
-            subscription2.Dispose();
+            pressedSubscription?.Dispose();
+            releasedSubscription?.Dispose();
         }
 
         public event EventHandler ButtonPressed;

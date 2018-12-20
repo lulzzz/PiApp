@@ -1,7 +1,5 @@
 ﻿using PiApp.Peripherals;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Unosquare.RaspberryIO;
 
 namespace PiApp.Services

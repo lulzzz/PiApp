@@ -1,28 +1,25 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Logging;
-using PiApp.Shared;
+using Newtonsoft.Json;
 using System;
-using System.Reactive.Subjects;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PiApp.Services.Clients
 {
-    public sealed class RelayNotifierService : IDisposable, IRelayNotifierService
+    public sealed class SwitchService : IDisposable, ISwitchService
     {
         private readonly HubConnection _hubConnection;
-        private readonly Subject<RelayStateInfo> _whenRelayStateSetSubject;
-        private readonly ILogger<RelayNotifierService> _logger;
-        private readonly IDisposable subscription;
+        private readonly ILogger<SwitchService> _logger;
+        private readonly HttpClient _httpClient;
+        private readonly IDisposable closedSubscription;
+        private readonly IDisposable openSubscription;
 
-        public IObservable<RelayStateInfo> WhenRelayStateSet => _whenRelayStateSetSubject;
-
-        public RelayNotifierService(ILogger<RelayNotifierService> logger, HubConnection hubConnection)
+        public SwitchService(ILogger<SwitchService> logger, HttpClient httpClient, HubConnection hubConnection)
         {
             _logger = logger;
-
+            _httpClient = httpClient;
             _hubConnection = hubConnection;
-
-            _whenRelayStateSetSubject = new Subject<RelayStateInfo>();
 
             _hubConnection.Closed += async (exception) =>
             {
@@ -45,10 +42,21 @@ namespace PiApp.Services.Clients
                 }
             };
 
-            subscription = _hubConnection.On("RelayStateSet", (Action<RelayStateInfo>)(rsc =>
+            closedSubscription = _hubConnection.On<string>("Closed", _ =>
             {
-                _whenRelayStateSetSubject.OnNext(rsc);
-            }));
+                Closed?.Invoke(this, EventArgs.Empty);
+            });
+
+            openSubscription = _hubConnection.On<string>("Open", _ =>
+            {
+                Open?.Invoke(this, EventArgs.Empty);
+            });
+        }
+
+        public async Task<bool> GetStateAsync()
+        {
+            return JsonConvert.DeserializeObject<bool>(
+                await _httpClient.GetStringAsync("/api/Switch"));
         }
 
         public async Task StartAsync()
@@ -67,7 +75,11 @@ namespace PiApp.Services.Clients
 
         public void Dispose()
         {
-            subscription.Dispose();
+            closedSubscription.Dispose();
+            openSubscription.Dispose();
         }
+
+        public event EventHandler Closed;
+        public event EventHandler Open;
     }
 }
